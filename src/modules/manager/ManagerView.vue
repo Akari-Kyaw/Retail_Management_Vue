@@ -22,11 +22,19 @@ import { computed, ref } from 'vue';
 import {useQuery, type UseQueryOptions } from '@tanstack/vue-query'
 import { fetchSale } from '@/api/sale/queries';
 import { fetchTotal } from '@/api/sale/queries';
+import { useSorted } from '@vueuse/core';
 
 
 const {data}=fetchSale.useQuery()
 
 const{data:totals}=fetchTotal.useQuery()
+// const sortedSales = computed(() => {
+//   if (!data?.value) return []
+//   return [...data.value].sort(
+//     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+//   )
+// })
+
 
 
 
@@ -37,8 +45,8 @@ const{data:totals}=fetchTotal.useQuery()
   </div>
   
     <div class="flex justify-center mt-5 mb-5">
-    <div class="bg-gray-200 shadow-lg rounded-lg p-6 max-w-md w-full">
-      <h1 class="text-center font-semibold text-2xl mb-4">Sales Summary</h1>
+    <div class="bg-white-200 shadow-lg rounded-lg p-6 max-w-md w-full">
+      <h1 class="text-center font-semibold text-2xl mb-4 text-sky-400">Sales Summary</h1>
       <div class="text-center font-semibold text-xl">
         <p class="mb-2">
           Total Profit: <span class="text-green-600">{{ totals?.totalProfit }}</span>
@@ -46,7 +54,13 @@ const{data:totals}=fetchTotal.useQuery()
         <p>
           Total Revenue: <span class="text-blue-600">{{ totals?.total }}</span>
         </p>
-      </div>
+        <p v-if="data">
+              Total Sale: <span class="text-pink-600">{{ data.length }}</span>
+            </p>
+            <p v-else>
+              Total Sale: 0
+        </p>
+                  </div>
     </div>
   </div>
 
@@ -60,6 +74,9 @@ const{data:totals}=fetchTotal.useQuery()
     <TableHeader class="bg-gray-200">
       <TableRow>
         <TableHead>
+          No
+        </TableHead>
+        <TableHead>
           Product ID
         </TableHead>
         <TableHead>Sale Quantity</TableHead>
@@ -67,12 +84,18 @@ const{data:totals}=fetchTotal.useQuery()
         <TableHead>
           Total Profit
         </TableHead>
-        <TableHead>Action</TableHead>
+        <TableHead>
+          Sale Date
+        </TableHead>
+        <!-- <TableHead>Action</TableHead> -->
 
       </TableRow>
     </TableHeader>
     <TableBody>
-      <TableRow v-for="sale in data" :key="sale.saleId">
+      <TableRow v-for="(sale,index) in data" :key="index">
+        <TableCell class="font-medium">
+          {{ index+1}}
+        </TableCell>
         <TableCell class="font-medium">
           {{ sale.productId }}
         </TableCell>
@@ -82,6 +105,9 @@ const{data:totals}=fetchTotal.useQuery()
           {{ sale.totalProfit}}
         </TableCell>
         <TableCell>
+          {{ (new Date(sale.created_at).toDateString())}}
+        </TableCell>
+        <!-- <TableCell>
           <div class="flex space-x-4">
            
               <Button variant="secondary">Add</Button>
@@ -90,7 +116,7 @@ const{data:totals}=fetchTotal.useQuery()
           <Button variant="destructive">Delete</Button>
           </div>
 
-        </TableCell>
+        </TableCell> -->
 
       </TableRow>
     </TableBody>

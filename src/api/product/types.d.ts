@@ -15,6 +15,6 @@ export type AddProductType={
     name: string
     remainingStock: number
     sellingPrice: number
-    pofit: number
+    profit: number
     createdBy: string
   }

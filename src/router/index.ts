@@ -2,8 +2,8 @@ import AppLayout from '@/layouts/AppLayout.vue'
 import CartView from '@/modules/cart/CartView.vue'
 import CashierView from '@/modules/cashier/CashierView.vue'
 import ManagerView from '@/modules/manager/ManagerView.vue'
+import AddProductView from '@/modules/product/AddProductView.vue'
 import ProductView from '@/modules/product/ProductView.vue'
-import SaleView from '@/modules/sale/SaleView.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 //import HomeView from '../views/HomeView.vue'
 
@@ -21,9 +21,9 @@ const router = createRouter({
           component: ProductView,
         },
         {
-          path: '/sale',
-          name: 'saleview',
-          component: SaleView,
+          path: '/addproduct',
+          name: 'addproductview',
+          component: AddProductView,
         },
         {
           path: '/manager',

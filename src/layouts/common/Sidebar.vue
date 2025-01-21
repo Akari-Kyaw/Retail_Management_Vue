@@ -20,7 +20,7 @@ import { CircleUser, Menu, Package2, Search } from 'lucide-vue-next'
           to="/"
           class="text-foreground font-semibold transition-colors hover:text-muted-foreground "
         >
-          Product
+          📦Product
         </RouterLink>
         <!-- <RouterLink
           to="/sale"
@@ -32,18 +32,18 @@ import { CircleUser, Menu, Package2, Search } from 'lucide-vue-next'
           to="/manager"
           class="text-foreground font-semibold transition-colors hover:text-muted-foreground"
         >
-          Manager
+          ⚙️Manager
         </RouterLink>
         <RouterLink
           to="/cart"
           class="text-foreground font-semibold transition-colors hover:text-muted-foreground"
         >
-          Cart
+          🛒Cart
         </RouterLink><RouterLink
           to="/cashier"
           class="text-foreground font-semibold transition-colors hover:text-muted-foreground"
         >
-          Cashier
+          💰Cashier
         </RouterLink>
         </nav>
        

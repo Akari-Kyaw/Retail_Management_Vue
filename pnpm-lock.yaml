@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@lottiefiles/dotlottie-vue':
+        specifier: ^0.5.4
+        version: 0.5.4(vue@3.5.13(typescript@5.6.3))
       '@tanstack/vue-query':
         specifier: ^5.62.16
         version: 5.62.16(vue@3.5.13(typescript@5.6.3))
@@ -507,6 +510,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@lottiefiles/dotlottie-vue@0.5.4':
+    resolution: {integrity: sha512-hIsUc+Bly3iTtFcbEQNmHUxgaCTmoG7RhuIRtyq21S0qKGM36ZEcfEHcTeFR87j+QXvWTgdPMbu0tzKY7MbWTQ==}
+    peerDependencies:
+      vue: ^3.3.4
+
+  '@lottiefiles/dotlottie-web@0.39.0':
+    resolution: {integrity: sha512-kJWL6NEtbXQQHFK8kMfNte/5vuTHjFhL11a30s4PJSikao8IeEu+hLJH72flWHyTLpL4tmnxW3WkTKUwZ8Osug==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2486,6 +2497,13 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@lottiefiles/dotlottie-vue@0.5.4(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@lottiefiles/dotlottie-web': 0.39.0
+      vue: 3.5.13(typescript@5.6.3)
+
+  '@lottiefiles/dotlottie-web@0.39.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

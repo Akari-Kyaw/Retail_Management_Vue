@@ -23,7 +23,7 @@ export const addProduct={
             mutationKey:['addproduct'],
             mutationFn:(payload: AddProductType)=>productServices.addProduct(payload),
             onSuccess:()=>{
-                queryClient.invalidateQueries({queryKey:['addproduct']})
+                queryClient.invalidateQueries({queryKey:['getAllProduct']})
             },
             ...opt
         })

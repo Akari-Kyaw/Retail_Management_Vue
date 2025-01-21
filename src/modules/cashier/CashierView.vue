@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/table'
 import Button from '@/components/ui/button/Button.vue';
 import { saveSale } from '@/api/sale/queries';
+import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
+import { useRouter } from 'vue-router';
 
 const cartStore=useCartStore();
 const {cartItems}=storeToRefs(cartStore);
@@ -23,6 +25,7 @@ const totalAmount=computed(()=>{
 })
 
 const { mutate: save } = saveSale.useMutation();
+const router=useRouter();
 
 const checkout = () => {
   try {
@@ -35,11 +38,14 @@ const checkout = () => {
       };
 
     save(saleData);
+
     cartStore.clearCart();
+    router.push('/')
     }
 
 
     alert('Thank you for shopping!');
+
   } catch (error) {
     console.error('Error during checkout:', error);
     alert('There was an error processing your checkout. Please try again.');
@@ -49,9 +55,17 @@ const checkout = () => {
 
 <template>
     <div>
-    <h1 class="text-2xl font-bold mb-4 text-center">Cashier</h1>
-    <div v-if="cartItems.length === 0" class="text-gray-500 text-center">
-      Your cart is empty.
+    <h1 class="text-2xl font-bold mb-4 text-center text-sky-400">Cashier</h1>
+    <div 
+          v-if="cartStore.cartItems.length === 0" 
+          class="flex items-center justify-center min-h-64"
+        >
+          <div class="max-w-lg mx-auto p-6 bg-white shadow-2xl rounded-lg border mt-10">
+            <p class="text-xl font-semibold text-center text-gray-800"> 
+              <DotLottieVue class="h-200 w-200" autoplay loop src="https://lottie.host/9e84c01f-f0aa-486b-840b-8570544c92c8/bEyMqDD9Q7.lottie"></DotLottieVue>
+              Purchase Product First
+            </p>
+          </div>
     </div>
     <Table v-else>
       <TableCaption>Your Cart Items</TableCaption>
@@ -72,20 +86,25 @@ const checkout = () => {
         </TableRow>
       </TableBody>
      <RouterLink to="/cart">
-        <div class="absolute left-30 flex items-center">
-        <Button > Back To Cart</Button>
+        <div class="absolute left-30 ml-3 flex items-center">
+        <Button class="bg-blue-200 text-black-300 hover:bg-gray-300" > Back To Cart</Button>
 
-    </div> 
+    </div>  
      </RouterLink>
-    <div class="absolute right-10 flex items-center">
-        <Button @click="checkout"> Check Out</Button>
+    <div class="absolute right-10 flex items-center ">
+        <Button class="bg-blue-200 text-black-300 hover:bg-gray-300" @click="checkout"> Check Out</Button>
 
-    </div>
+    </div> <br>
+    
+    
+    
     </Table>
-   
-    <div class="mt-4 text-center text-2xl ">
-      <strong>Total Amount: {{ totalAmount }}</strong>
+    <div class="mt-5  text-center text-2xl ">
+      Total Amount:<strong class="text-red-500"> {{ totalAmount }}</strong>
     </div>
+        
+   
+    
   </div>
     
 </template>

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+ <script setup lang="ts">
 import { computed } from 'vue';
 import { fetchProducts } from '@/api/product/quries';
 import { useCartStore } from '@/stores/cart';
@@ -6,6 +6,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Button } from '@/components/ui/button';
 import { storeToRefs } from 'pinia';
 import {Item} from '@/stores/cart'
+import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
 const cartStore = useCartStore();
 //const { data: products } = fetchProducts.useQuery();
 //console.log(cartStore.items);
@@ -58,13 +59,26 @@ const updateQuantity = (productId: string, quantity: number) => {
     cartStore.updateQuantity(productId, remainingStock);
   }
 };
+
+
 </script>
 <template>
     <div>
-      <h1 class="text-2xl font-bold mb-4 text-center">Shopping Cart</h1>
-      <div v-if="item.length === 0" class="text-gray-500 text-center">
+      <h1 class="text-2xl font-bold mb-4 text-center text-sky-400">Shopping Cart</h1>
+      <!-- <div v-if="item.length === 0" class="text-gray-500 text-center">
         Your cart is empty.
-      </div>
+      </div> -->
+      <div 
+          v-if="item.length === 0" 
+          class="flex items-center justify-center min-h-64"
+        >
+          <div class="max-w-lg mx-auto p-6 bg-white shadow-2xl rounded-lg border a mt-10">
+            <p class="text-xl font-semibold text-center text-gray-800"> 
+              <DotLottieVue class="h-200 w-200" autoplay loop src="https://lottie.host/dc270f94-512e-4a19-bc4e-b5815f497fde/AehvCrQERz.lottie"></DotLottieVue>
+              There are no items in your Cart
+            </p>
+          </div>
+    </div>
       <Table v-else>
         <TableCaption>Your Cart Items</TableCaption>
         <TableHeader class="bg-gray-200">
@@ -82,10 +96,10 @@ const updateQuantity = (productId: string, quantity: number) => {
             <TableCell>{{ getProductName(productInCart.productId) }}</TableCell>
             <TableCell>
             <div class="flex items-center">
-              <Button @click="updateQuantity(productInCart.productId, productInCart.quantity - 1)" :disabled="productInCart.quantity <= 1">-</Button>
+              <Button class="bg-blue-200 text-black-300 hover:bg-gray-300"  @click="updateQuantity(productInCart.productId, productInCart.quantity - 1)" :disabled="productInCart.quantity <= 1">-</Button>
 
               <span class="mx-2">{{ productInCart.quantity }}</span>
-              <Button @click="updateQuantity(productInCart.productId, productInCart.quantity + 1)">+</Button>
+              <Button class="bg-blue-200 text-black-300 hover:bg-gray-300" @click="updateQuantity(productInCart.productId, productInCart.quantity + 1)">+</Button>
               
             </div>
           </TableCell>
@@ -93,13 +107,13 @@ const updateQuantity = (productId: string, quantity: number) => {
             <TableCell>{{ getProductPrice(productInCart.productId) }}</TableCell>
             <TableCell>{{ productInCart.quantity * getProductPrice(productInCart.productId) }}</TableCell>
             <TableCell>
-              <Button variant="destructive" @click="removeFromCart(productInCart.productId)">Remove</Button>
+              <Button variant="destructive" class="text-black-300 hover:bg-gray-300" @click="removeFromCart(productInCart.productId)"> ✖️ Remove</Button>
             </TableCell>
           </TableRow>
         </TableBody>
         <div class="absolute top-50 right-10 flex items-center">
           <RouterLink to="/cashier">
-            <Button>Cashier</Button>
+            <Button class="bg-blue-200 text-black-300 hover:bg-gray-300">Cashier</Button>
           </RouterLink>
         </div> <br>
 
