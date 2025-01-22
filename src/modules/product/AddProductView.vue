@@ -19,6 +19,10 @@ import { addProduct, editProduct } from '@/api/product/quries';
 import { ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { toast } from '@/components/ui/toast';
+import ToastAction from '@/components/ui/toast/ToastAction.vue';
+import { QueryClient, useQueryClient } from '@tanstack/vue-query';
+
+const queryClient = useQueryClient();
 
 const formSchema = toTypedSchema(
     z.object({
@@ -34,9 +38,12 @@ const formSchema = toTypedSchema(
         profit: z
             .number({ required_error: ('error-msg.required') })
             .min(1, { message: ('error-msg.required') }),
-        createdBy: z
-            .string({ required_error: ('error-msg.required') })
-            .min(1, { message: ('error-msg.required') }),
+        // createdBy: z
+        //     .string({ required_error: ('error-msg.required') })
+        //     .min(1, { message: ('error-msg.required') }),
+        // updatedBy: z
+        //     .string({ required_error: ('error-msg.required') })
+        //     .min(1, { message: ('error-msg.required') }),
 
     })
 );
@@ -80,8 +87,43 @@ watch(() => props.isEdit, (product) => {
     }
 });
 
-const { mutate: save } = addProduct.useMutation();
-const { mutate: edit } = editProduct.useMutation();
+const { mutate: save } = addProduct.useMutation({
+    onError: (error) => {
+        ToastAction({
+            title: 'Product add fail!',
+            variant: 'destructive',
+        });
+    },
+    onSuccess: () => {
+        toast({
+            title: 'Product added successfully!',
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['getAllProduct'],
+        });
+    },
+    onSettled: () => {
+        props.closeDialog();
+    },
+});
+const { mutate: edit } = editProduct.useMutation({
+    onError: (error) => {
+        toast({
+            title: 'Product update fail!',
+        });
+    },
+    onSuccess: () => {
+        toast({
+            title: 'Product updated successfully!',
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['getAllProduct'],
+        });
+    },
+    onSettled: () => {
+        props.closeDialog();
+    },
+});
 
 //  const onSubmit = form.handleSubmit(async (values) => {
 //      try {
@@ -99,18 +141,11 @@ const { mutate: edit } = editProduct.useMutation();
 //      }
 const onSubmit = form.handleSubmit((values) => {
     if (props.isEdit) {
-        edit({ productId: props.product.id, ...values });
-        toast({
-            title: 'Product updated successfully!',
-        });
+        edit({ productId: props.product.productId, ...values });
     } else {
         save(values);
-        toast({
-            title: 'Product added successfully!',
-        });
     }
     form.resetForm();
-    props.closeDialog();
 });
 // const { mutate: edit } = editProduct.useMutation();
 // const onSubmit = form.handleSubmit(async(values) => {
