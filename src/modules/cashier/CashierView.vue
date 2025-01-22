@@ -44,11 +44,17 @@ const checkout = () => {
     }
 
 
-    alert('Thank you for shopping!');
+    toast({
+    title: "Thank You For Shopping",
+    duration:700,
+  });
 
   } catch (error) {
     console.error('Error during checkout:', error);
-    alert('There was an error processing your checkout. Please try again.');
+    toast({
+    title: "There was an error processing your checkout. Please try again.",
+    duration:700,
+  });
   }
 };
 </script>

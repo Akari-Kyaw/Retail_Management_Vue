@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { storeToRefs } from 'pinia';
 import {Item} from '@/stores/cart'
 import { DotLottieVue } from '@lottiefiles/dotlottie-vue';
+import { Minus, PlusIcon, PlusSquareIcon } from 'lucide-vue-next';
 const cartStore = useCartStore();
 //const { data: products } = fetchProducts.useQuery();
 //console.log(cartStore.items);
@@ -54,7 +55,9 @@ const updateQuantity = (productId: string, quantity: number) => {
   } 
   else if(quantity<=remainingStock){
     cartStore.updateQuantity(productId, quantity);
+    
   }
+  
     else {
     cartStore.updateQuantity(productId, remainingStock);
   }
@@ -96,10 +99,10 @@ const updateQuantity = (productId: string, quantity: number) => {
             <TableCell>{{ getProductName(productInCart.productId) }}</TableCell>
             <TableCell>
             <div class="flex items-center">
-              <Button class="bg-blue-200 text-black-300 hover:bg-gray-300"  @click="updateQuantity(productInCart.productId, productInCart.quantity - 1)" :disabled="productInCart.quantity <= 1">-</Button>
+              <Minus  @click="updateQuantity(productInCart.productId, productInCart.quantity - 1)" :disabled="productInCart.quantity <= 1"/>
 
               <span class="mx-2">{{ productInCart.quantity }}</span>
-              <Button class="bg-blue-200 text-black-300 hover:bg-gray-300" @click="updateQuantity(productInCart.productId, productInCart.quantity + 1)">+</Button>
+              <PlusIcon @click="updateQuantity(productInCart.productId, productInCart.quantity + 1)"/>
               
             </div>
           </TableCell>

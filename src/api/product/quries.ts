@@ -1,7 +1,7 @@
 import {useMutation, UseMutationOptions, useQuery, useQueryClient, type UseQueryOptions } from '@tanstack/vue-query'
 import { APIResponse } from "../config"
 import productServices from './services'
-import { AddProductType, ProductType } from "./types"
+import { AddProductType, DeleteProductType, EditProductType, ProductType } from "./types"
 
 
 export const fetchProducts = {
@@ -27,6 +27,29 @@ export const addProduct={
             },
             ...opt
         })
-    }
-            
+    }            
 }
+export const editProduct={
+    useMutation:(opt? : UseMutationOptions<any,Error,EditProductType,any>)=>{
+        const queryClient=useQueryClient()
+        return useMutation({
+            mutationKey:['editproduct'],
+            mutationFn:(payload: EditProductType)=>productServices.editProduct(payload),
+            onSuccess:()=>{
+                queryClient.invalidateQueries({queryKey:['getAllProduct']})
+            },
+            ...opt
+        })
+    }}
+    export const deleteProduct={
+        useMutation:(opt? : UseMutationOptions<any,Error,string,any>)=>{
+            const queryClient=useQueryClient()
+            return useMutation({
+                mutationKey:['deleteproduct'],
+                mutationFn:(productId:string)=>productServices.deleteProduct(productId),
+                onSuccess:()=>{
+                    queryClient.invalidateQueries({queryKey:['getAllProduct']})
+                },
+                ...opt
+            })
+        }}

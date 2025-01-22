@@ -18,3 +18,15 @@ export type AddProductType={
     profit: number
     createdBy: string
   }
+
+  export type EditProductType={
+    name: string
+    remainingStock: number
+    sellingPrice: number
+    profit: number
+    update_by: string
+  }
+
+  export type DeleteProductType={
+    productId: string
+  }

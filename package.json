@@ -15,6 +15,7 @@
   "dependencies": {
     "@lottiefiles/dotlottie-vue": "^0.5.4",
     "@tanstack/vue-query": "^5.62.16",
+    "@tanstack/vue-table": "^8.20.5",
     "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^12.3.0",
     "axios": "^1.7.9",
