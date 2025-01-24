@@ -2,8 +2,6 @@
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
-    DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -16,11 +14,10 @@ import { toTypedSchema } from '@vee-validate/zod';
 import * as z from 'zod'
 import { useForm } from 'vee-validate';
 import { addProduct, editProduct } from '@/api/product/quries';
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { watch } from 'vue'
 import { toast } from '@/components/ui/toast';
 import ToastAction from '@/components/ui/toast/ToastAction.vue';
-import { QueryClient, useQueryClient } from '@tanstack/vue-query';
+import { useQueryClient } from '@tanstack/vue-query';
 
 const queryClient = useQueryClient();
 
