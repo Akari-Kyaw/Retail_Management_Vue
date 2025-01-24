@@ -1,7 +1,7 @@
 import {useMutation, UseMutationOptions, useQuery, useQueryClient, type UseQueryOptions } from '@tanstack/vue-query'
 import { APIResponse } from "../config"
 import productServices from './services'
-import { AddProductType, DeleteProductType, EditProductType, ProductType } from "./types"
+import { AddProductType,  EditProductType, ProductType } from "./types"
 
 
 export const fetchProducts = {

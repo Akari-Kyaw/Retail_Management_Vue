@@ -98,7 +98,6 @@ const updateQuantity = (productId: string, quantity: number) => {
 
             </div>
           </TableCell>
-          <!-- <TableCell>{{ productInCart.quantity }}</TableCell> -->
           <TableCell>{{ getProductPrice(productInCart.productId) }}</TableCell>
           <TableCell>{{ productInCart.quantity * getProductPrice(productInCart.productId) }}</TableCell>
           <TableCell>

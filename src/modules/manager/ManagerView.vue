@@ -2,7 +2,6 @@
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -36,7 +35,6 @@ import { computed } from 'vue';
 
 const { data: sales, isFetching } = fetchSale.useQuery({ queryKey: ['getAllSale'] })
 const { data: totals } = fetchTotal.useQuery({ queryKey: ['getTotal'] })
-// const sales = ref<SaleType[]>(data.value || []);
 const columnHelper = createColumnHelper<SaleType>()
 const columns = [
   columnHelper.display({
@@ -138,66 +136,6 @@ const table = computed(() => isFetching ? useVueTable({
 </script>
 
 <template>
-
-  <!-- <div class="flex justify-center mt-5 mb-5">
-    <div class="bg-white-200 shadow-lg rounded-lg p-6 max-w-md w-full">
-      <h1 class="text-center font-semibold text-2xl mb-4 text-sky-400">Sales Summary</h1>
-      <div class="text-center font-semibold text-xl">
-        <p class="mb-2">
-          Total Profit: <span class="text-green-600">{{ totals?.totalProfit }}</span>
-        </p>
-        <p>
-          Total Revenue: <span class="text-blue-600">{{ totals?.total }}</span>
-        </p>
-        <p v-if="data">
-          Total Sale: <span class="text-pink-600">{{ data.length }}</span>
-        </p>
-        <p v-else>
-          Total Sale: 0
-        </p>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- <Table>
-      <TableCaption>Sale Lists</TableCaption>
-      <TableHeader class="bg-gray-200">
-        <TableRow>
-          <TableHead>
-            No
-          </TableHead>
-          <TableHead>
-            Product ID
-          </TableHead>
-          <TableHead>Sale Quantity</TableHead>
-          <TableHead>Total Price</TableHead>
-          <TableHead>
-            Total Profit
-          </TableHead>
-          <TableHead>
-            Sale Date
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow v-for="(sale, index) in data" :key="index">
-          <TableCell class="font-medium">
-            {{ index + 1 }}
-          </TableCell>
-          <TableCell class="font-medium">
-            {{ sale.productId }}
-          </TableCell>
-          <TableCell>{{ sale.qty }}</TableCell>
-          <TableCell>{{ sale.totalPrice }}</TableCell>
-          <TableCell>
-            {{ sale.totalProfit }}
-          </TableCell>
-          <TableCell>
-            {{ (new Date(sale.created_at).toDateString()) }}
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table> -->
   <div class="flex justify-center mt-5 mb-5">
     <div class="bg-white-200 shadow-lg rounded-lg p-6 max-w-md w-full">
       <h1 class="text-center font-semibold text-2xl mb-4 text-sky-400">Sales Summary</h1>
@@ -265,10 +203,6 @@ const table = computed(() => isFetching ? useVueTable({
         </Table>
       </div>
       <div class="flex items-center justify-end space-x-2 py-4">
-        <!-- <div class="flex-1 text-sm text-muted-foreground">
-          {{ table.getState().pagination.pageIndex + 1 }} of
-          {{ table.getFilteredRowModel().rows.length }} row(s) selected.
-        </div> -->
         <div class="space-x-2">
           <Button variant="outline" size="sm" :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
             Previous

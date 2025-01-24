@@ -35,12 +35,6 @@ const formSchema = toTypedSchema(
         profit: z
             .number({ required_error: ('error-msg.required') })
             .min(1, { message: ('error-msg.required') }),
-        // createdBy: z
-        //     .string({ required_error: ('error-msg.required') })
-        //     .min(1, { message: ('error-msg.required') }),
-        // updatedBy: z
-        //     .string({ required_error: ('error-msg.required') })
-        //     .min(1, { message: ('error-msg.required') }),
 
     })
 );
@@ -122,20 +116,6 @@ const { mutate: edit } = editProduct.useMutation({
     },
 });
 
-//  const onSubmit = form.handleSubmit(async (values) => {
-//      try {
-
-//          console.log('Form Values:', values);
-
-//          await save(values);
-
-//          alert('Product added successfully!')
-//          form.resetForm();
-//         isOpen.value = false;
-//      } catch (error) {
-//          alert('Failed to add product. Please try again.');
-
-//      }
 const onSubmit = form.handleSubmit((values) => {
     if (props.isEdit) {
         edit({ productId: props.product.productId, ...values });
@@ -144,24 +124,6 @@ const onSubmit = form.handleSubmit((values) => {
     }
     form.resetForm();
 });
-// const { mutate: edit } = editProduct.useMutation();
-// const onSubmit = form.handleSubmit(async(values) => {
-//   try {
-//     const payload = props.isEdit
-//       ? {
-//         productId: .product.id,
-//         name: values.name,
-//         stock: values.stock,
-//         price: values.price,
-//         profit: values.profitPerItem,
-//       }
-//       : {
-//         name: values.name,
-//         stock: values.stock,
-//         price: values.price,
-//         profit: values.profitPerItem,
-//       };
-//     }}
 </script>
 <template>
     <Dialog v-model:open="props.isOpen">

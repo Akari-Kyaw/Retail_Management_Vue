@@ -2,14 +2,10 @@
 import { Button } from '@/components/ui/button';
 import { ProductType } from '@/api/product/types';
 import { Item, useCartStore } from '@/stores/cart';
-import { storeToRefs } from 'pinia';
-import AddProductView from './AddProductView.vue';
 import { Edit2Icon, Minus, PlusIcon, Trash } from 'lucide-vue-next';
 import { inject } from 'vue';
 
 const cartStore = useCartStore();
-const { cartItems } = storeToRefs(cartStore);
-// const { mutate } = deleteProduct.useMutation();
 
 
 const props = defineProps<{
